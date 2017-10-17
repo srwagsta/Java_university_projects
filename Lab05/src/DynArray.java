@@ -36,12 +36,7 @@ public class DynArray
    */
   private void grow()
   {
-	  double[] return_arr = new double[(this.arraySize()*2)];
-	  int index =0;
-	  for(double value:this.array) {
-		  return_arr[index] = value;
-		  ++index;
-	  }
+	  double[] return_arr = Arrays.copyOf(this.array,this.arraySize*2);
 	  this.size = this.arraySize()*2;
 	  this.array = return_arr;
   }
@@ -54,10 +49,7 @@ public class DynArray
   private void shrink()
   {
 	  if((this.elements()*2) <= (this.arraySize()) && this.arraySize() > 1){
-		  double[] return_arr = new double[(this.arraySize()/2)];
-		  for(int i=0;i<this.elements();i++){
-			  return_arr[i] = this.array[i];
-		  }
+		  double[] return_arr = Arrays.copyOf(this.array,this.arraySize/2);
 		  this.array = return_arr;
 		  this.size = this.size/2;
 	  }else return;
