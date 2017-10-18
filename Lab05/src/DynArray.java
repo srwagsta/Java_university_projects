@@ -36,9 +36,8 @@ public class DynArray
    */
   private void grow()
   {
-	  double[] return_arr = Arrays.copyOf(this.array,this.arraySize*2);
+	  this.array = Arrays.copyOf(this.array,this.arraySize*2);
 	  this.size = this.arraySize()*2;
-	  this.array = return_arr;
   }
   
   /**
@@ -49,8 +48,7 @@ public class DynArray
   private void shrink()
   {
 	  if((this.elements()*2) <= (this.arraySize()) && this.arraySize() > 1){
-		  double[] return_arr = Arrays.copyOf(this.array,this.arraySize/2);
-		  this.array = return_arr;
+		  this.array = Arrays.copyOf(this.array,this.arraySize/2);
 		  this.size = this.size/2;
 	  }else return;
   }
