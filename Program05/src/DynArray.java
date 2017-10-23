@@ -40,7 +40,10 @@ public class DynArray
   }
   
   public void printArray(){
-	  System.out.print(Arrays.toString(this.array));
+	 // System.out.print(Arrays.toString(this.array));
+	 // This is fast and simple, and can be parsed easily later. 
+	for(int i=0; i<this.elements(); i++)
+		System.out.println("array.at(" +i +") = " +this.at(i));
   }
   
 // Mutators
@@ -70,7 +73,7 @@ public class DynArray
   public double removeAt(int index){
 	  if(index >= this.elements()) return Double.NaN;        
 	  //Checks that the index to be removed is not beyond the current next index
-	  double returnVal = 0;
+	  double returnVal = this.at(index);
 	  if(0 <= index && index <= this.elements()){
 		  returnVal = this.at(index);                   
           for(int i=index; i<this.arraySize()-1; i++){
