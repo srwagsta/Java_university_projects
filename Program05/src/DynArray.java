@@ -45,21 +45,21 @@ public class DynArray
   
 // Mutators
   public void insertAt(int index,double value){
-	  if(0 <= index && index < this.elements()){
-          double [] returnArr = Arrays.copyOf(this.array,this.arraySize()+1);
-          for(int i=index; i<returnArr.length-1; i++){
-        	  double tempVal = returnArr[i];
-        	  returnArr[i] = value;
-        	  value = returnArr[i+1];
-        	  returnArr[i+1] = tempVal;
+	  if(this.elements()+1 == this.arraySize())
+		  this.grow();
+	  
+	  if(0 <= index && index <= this.elements()){
+          for(int i=index; i<this.array.length-1; i++){
+        	  double tempVal = this.array[i];
+        	  this.array[i] = value;
+        	  value = this.array[i+1];
+        	  this.array[i+1] = tempVal;
           }
-          this.array = returnArr;
           this.nextIndex++; 
 	  }
 	  else
 		  return;
-	  if(this.elements()-1 == this.arraySize())
-		  this.grow();
+	  
   }
   
   public void insert(double value){
