@@ -53,5 +53,6 @@ public class DynArrayDriver
 		System.out.println("value = " + value);
 		System.out.println("size = " + myArray.arraySize());
 		System.out.println("elements = " + myArray.elements() + "\n");
+		myArray.printArray();
 	}
 }

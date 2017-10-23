@@ -45,15 +45,16 @@ public class DynArray
   
 // Mutators
   public void insertAt(int index,double value){
-	  if(this.elements()+1 == this.arraySize())
+	  if(this.elements() == this.arraySize())
 		  this.grow();
-	  
 	  if(0 <= index && index <= this.elements()){
-          for(int i=index; i<this.array.length-1; i++){
+		  for(int i=index; i<this.arraySize(); i++){
         	  double tempVal = this.array[i];
         	  this.array[i] = value;
-        	  value = this.array[i+1];
-        	  this.array[i+1] = tempVal;
+        	  if(i < this.arraySize()-1){
+	        	  value = this.array[i+1];
+	        	  this.array[i+1] = tempVal;
+        	  }
           }
           this.nextIndex++; 
 	  }
@@ -67,21 +68,22 @@ public class DynArray
   }
   
   public double removeAt(int index){
+	  if(index >= this.elements()) return Double.NaN;        
+	  //Checks that the index to be removed is not beyond the current next index
 	  double returnVal = 0;
-	  if(0 <= index && index < this.elements()){
-		  returnVal = this.array[index];
-          this.array = Arrays.copyOf(this.array,this.arraySize());
+	  if(0 <= index && index <= this.elements()){
+		  returnVal = this.at(index);                   
           for(int i=index; i<this.arraySize()-1; i++){
-        	  this.array[i] = this.array[i++];
+        	  this.array[i] = this.array[i+1];
           }
-          this.array[this.arraySize()-1] = 0;
-          this.nextIndex--;
+          this.array[this.arraySize()-1] = Double.NaN;
+          this.nextIndex--;         
+          
 	  }
-	  else
-		  return returnVal;
-	  if(this.elements()-1 == this.arraySize()/2)
+	  if((this.elements()) < (this.arraySize()/2)){
 		  this.shrink();
-	  return returnVal;
+	  } 
+	  return returnVal;  
   }
   
   public double remove(){
@@ -106,7 +108,7 @@ public class DynArray
    */
   private void shrink()
   {
-	  if((this.elements()*2) <= (this.arraySize()) && this.arraySize() > 1){
+	  if(((this.elements()-1*2) <= this.arraySize()) && (this.arraySize() > 1)){
 		  this.array = Arrays.copyOf(this.array,this.arraySize()/2);
 		  this.size = this.size/2;
 	  }else return;
