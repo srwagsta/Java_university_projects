@@ -51,13 +51,12 @@ public class DynArray
 	  if(this.elements() == this.arraySize())
 		  this.grow();
 	  if(0 <= index && index <= this.elements()){
-		  for(int i=index; i<this.arraySize(); i++){
-        	  double tempVal = this.array[i];
-        	  this.array[i] = value;
-        	  if(i < this.arraySize()-1){
-	        	  value = this.array[i+1];
-	        	  this.array[i+1] = tempVal;
-        	  }
+	  	  double tempVal = this.array[index];
+	  	  this.array[index] = value;
+		  for(int i=index+1; i<this.arraySize(); i++){
+        	  value = this.array[i];
+        	  this.array[i] = tempVal;
+        	  tempVal = value;
           }
           this.nextIndex++; 
 	  }
