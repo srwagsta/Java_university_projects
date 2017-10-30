@@ -33,7 +33,7 @@ public class Stack extends DynArray{
     * Print the stack in the Stack order
     */
     public void stackDump(){
-        for(int i=super.elements(); i>=0; i--)
+        for(int i=super.elements()-1; i>=0; i--)
             System.out.println("array.at(" +i +") = " +this.at(i));
     }
 
@@ -46,7 +46,7 @@ public class Stack extends DynArray{
         super.insert(value);
     }
     /*
-    * If the stack in not empty remove and return
+    * If the stack is not empty remove and return
     * the most recently pushed value. If there
     * are no values then NaN is returned.
     * @return The last pushed value or NaN
