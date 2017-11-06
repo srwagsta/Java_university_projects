@@ -54,7 +54,7 @@ public class Oct extends Nat implements Mod8 {
     }
 
 // Implemented methods
-    
+
     public Nat inverse(){
         return new Nat(Mod8.MODULUS-this.getN());
     }
