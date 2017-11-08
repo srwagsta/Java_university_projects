@@ -10,6 +10,7 @@ public class Leader extends Member{
     public static final int MAX_TERM = 2;
 
 // Instance variables
+    private boolean OrgLeader;
     private int term;
 
 // Constructors
@@ -24,8 +25,18 @@ public class Leader extends Member{
     }
 
     /**
-     * Specifying constructor
+     * Specifying constructor with only the name
+     * The term length is default to 0
      * @param name
+     */
+    public Leader(String name)
+    {
+        this(name,0);
+    }
+
+    /**
+     * Specifying constructor
+     * @param name and term length
      */
     public Leader(String name, int term)
     {
@@ -49,6 +60,10 @@ public class Leader extends Member{
     private void setTerm(int term) {
         this.term = term<=Leader.MAX_TERM ? term : 0;
     }
+
+    public boolean getLead(){ return this.OrgLeader; }
+
+    protected void setLead() { this.OrgLeader = !this.OrgLeader; }
 
 // Override methods
 

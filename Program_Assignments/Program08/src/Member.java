@@ -58,6 +58,18 @@ public class Member extends Person{
      */
     public int getId() { return this.id; }
 
+// Instance methods
+
+    /**
+     * Standard equals method
+     * @param guest Member
+     * @return the boolean result of id and name comparisons
+     */
+    public boolean equals(Member guest){
+        return this.getId() == guest.getId() &&
+                this.getName().equals(guest.getName());
+    }
+
 // Override methods
 
     /**

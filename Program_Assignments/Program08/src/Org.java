@@ -85,8 +85,47 @@ public class Org {
      * @param A Leader object for the new leader
      */
     private void setLeader(Leader leader) {
-        this.leader = leader;
+        if(!leader.getLead()) {
+            leader.setLead();
+            if(this.leader != null)
+                this.leader.setLead();
+            this.leader = leader;
+        }
     }
 
-    
+    /**
+     * Return of a safe array of the member of the Org
+     * @return a safe array of Objects as members
+     */
+    public Object[] getMembers(){ return this.members.toArray(); }
+
+    /**
+     * Adds a new member to the Org if it is not already
+     * a member
+     * @param a new member
+     */
+    public void addMember(Member mem){
+        if(!members.contains(mem))
+            this.members.add(mem);
+    }
+
+// Override methods
+
+    /**
+     * Returns the string representation of an Org
+     * this includes the Name, Leader, and all the members
+     * @return a string of the name, leader, and all the members
+     */
+    @Override
+    public String toString(){
+        StringBuilder returnStr = new StringBuilder("Organization name: " + this.getName() +
+                "\n\tLeader: " + this.getLeader() +
+                "\n---- Members ----\n");
+        for(Object member : this.getMembers()){
+            returnStr.append("\n");
+            returnStr.append(member);
+        }
+        return returnStr.toString();
+    }
+
 } // Close Class
