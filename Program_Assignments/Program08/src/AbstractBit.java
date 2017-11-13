@@ -28,7 +28,7 @@ public abstract class AbstractBit {
      */
     public AbstractBit(AbstractBit guest) { this(guest.getBit());}
 
-// Accessors nd mutators
+// Accessors and mutators
 
     /**
      * Standard mutator for the bit value with no validation
