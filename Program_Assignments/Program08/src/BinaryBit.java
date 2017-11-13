@@ -47,26 +47,21 @@ public class BinaryBit extends AbstractBit{
      * carry bit
      */
     public AbstractBit addBits(AbstractBit guest){
-        return new BinaryBit( Boolean.logicalOr(
-                this.getBit(),guest.getBit()));
+        return new BinaryBit(this.getBit() | guest.getBit());
     }
 
 
     public AbstractBit addBits(AbstractBit guest1, AbstractBit guest2){
-        return new BinaryBit(Boolean.logicalOr(Boolean.logicalOr(
-                this.getBit(),guest1.getBit()),
-                guest2.getBit()));
+        return this.addBits(guest1).addBits(guest2);
     }
 
     public AbstractBit carryBit(AbstractBit guest){
-        return new BinaryBit( Boolean.logicalAnd(
-                this.getBit(),guest.getBit()));
+        return new BinaryBit(
+                this.getBit() & guest.getBit());
     }
 
     public AbstractBit carryBit(AbstractBit guest1, AbstractBit guest2){
-        return new BinaryBit(Boolean.logicalAnd(Boolean.logicalAnd(
-                this.getBit(),guest1.getBit()),
-                guest2.getBit()));
+        return this.carryBit(guest1).carryBit(guest2);
     }
 
     public boolean equals(BinaryBit guest){

@@ -44,7 +44,7 @@ public abstract class AbstractBit {
 
 // Override methods
     public String toString(){
-        return "Bit: " + this.getBit();
+        return this.getBit() ? "1" : "0";
     }
 
 // Instance methods
