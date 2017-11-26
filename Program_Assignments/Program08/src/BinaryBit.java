@@ -35,7 +35,7 @@ public class BinaryBit extends AbstractBit{
      * set to the default value of False
      * @param bit - the int representation of a binary bit value
      */
-    public BinaryBit(int bit){ super(bit != 1); }
+    public BinaryBit(int bit){ super(bit == 1); }
 
 // Instance methods
 
@@ -47,7 +47,8 @@ public class BinaryBit extends AbstractBit{
      * carry bit
      */
     public AbstractBit addBits(AbstractBit guest){
-        return new BinaryBit(this.getBit() | guest.getBit());
+        return new BinaryBit(this.getBit() ^
+                guest.getBit());
     }
 
 
@@ -61,7 +62,8 @@ public class BinaryBit extends AbstractBit{
     }
 
     public AbstractBit carryBit(AbstractBit guest1, AbstractBit guest2){
-        return this.carryBit(guest1).carryBit(guest2);
+        return new BinaryBit(this.carryBit(guest1).getBit() |
+                guest2.getBit());
     }
 
     public boolean equals(BinaryBit guest){

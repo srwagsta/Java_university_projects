@@ -12,7 +12,6 @@ public class BitString {
 // Constructor
     public BitString(){
         this(new ArrayList<>());
-        this.addBit(new BinaryBit());
     }
 
     protected BitString(ArrayList<AbstractBit> bitList){
