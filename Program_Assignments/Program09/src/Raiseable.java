@@ -35,7 +35,7 @@ interface Raiseable
 
     /**
      *  Creates a new file that is a copy of the given
-     *  input file - with the specifiedentry removed
+     *  input file - with the specified entry removed
      *  Returns true if a matching entry was found / removed;
      *  false if no such entry exists
      * @param inFileName
