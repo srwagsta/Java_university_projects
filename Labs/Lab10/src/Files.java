@@ -33,7 +33,9 @@ public class Files
     try(
         FileWriter fw = new FileWriter(outFileName, false); // Set append to false
         BufferedWriter bw = new BufferedWriter(fw);
+        // The buffer here allows the output to be buffered then written as a batch, less I/O, more efficient.
         PrintWriter out = new PrintWriter(bw)
+        // PrintWriter gives me those familiar print functions
         ){
         for(int i=0; i<words.length;i++){
             out.printf("words[%d] = " + words[i], i);
@@ -82,6 +84,6 @@ public class Files
       System.out.println(e.getMessage());
     }
     
-    stdIn.close();
+    stdIn.close(); // Closes the system input scanner
   }
 }
