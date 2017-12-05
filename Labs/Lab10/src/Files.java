@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 import java.io.PrintWriter;
 import java.io.FileWriter;
@@ -42,7 +43,7 @@ public class Files
             if(i != words.length-1)
                 out.print("\n"); // print a new line except for the last line
         }
-    }catch ( Exception e){
+    }catch ( IOException e){
         System.out.print("\n\n" + e.getClass() + " : ");
         System.out.println(e.getMessage());
     }
