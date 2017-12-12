@@ -73,6 +73,8 @@ public class MineSweapPart extends JFrame
 // flag a cell : ctrl + left click
                 if ( !flagged && !exposed && (mod & ActionEvent.CTRL_MASK) != 0 )
                 {
+                    // If you are out of flags do nothing
+                    if(MineSweapPart.minesLeft == 0 ){return;}
                     jb.setText(MineSweapPart.FLAGGED);
                     --MineSweapPart.minesLeft;
 // if the MyJbutton that the mouse action occurred in is a mine
@@ -80,6 +82,7 @@ public class MineSweapPart extends JFrame
                     {
                         MineSweapPart.actualMinesLeft -- ;
                         MineSweapPart.minesLeft --;
+                        // If all the mines are flagged, exit
                         if(actualMinesLeft == 0)
                             System.exit(0);
                     }
@@ -94,8 +97,7 @@ public class MineSweapPart extends JFrame
 // if the MyJbutton that the mouse action occurred in is a mine
                     if ( sGrid[jb.row][jb.col] == 9 )
                     {
-// what else do you need to adjust?
-// could the game be over?
+                        ++MineSweapPart.actualMinesLeft;
                     }
                     setTitle("MineSweap " +
                             MineSweapPart.minesLeft +" Mines left");
@@ -119,9 +121,8 @@ public class MineSweapPart extends JFrame
 // if the MyJButton that was just exposed is a mine
             if ( sGrid[jb.row][jb.col] == 9 )
             {
-// what else do you need to adjust?
-// could the game be over?
-                return;
+                System.exit(0);
+                // Exit, the cell you exposed was a mine
             }
 // if the MyJButton that was just exposed has no mines in its perimeter
             if ( sGrid[jb.row][jb.col] == 0 )
@@ -131,9 +132,6 @@ public class MineSweapPart extends JFrame
 // lots of work here - must expose all MyJButtons in its perimeter
 // and so on
 // and so on
-// .
-// .
-// .
                 return;
             }
         }
