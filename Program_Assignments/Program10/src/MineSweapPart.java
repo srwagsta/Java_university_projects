@@ -1,10 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.time.LocalTime;
+import static java.time.temporal.ChronoUnit.MINUTES;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MineSweapPart extends JFrame
 {
+    private static final LocalTime STARTTIME = LocalTime.now();
     private static final long serialVersionUID = 1L;
     private static final int HEIGHT = 760;
     private static final int WIDTH = 760;
@@ -84,6 +87,10 @@ public class MineSweapPart extends JFrame
                         MineSweapPart.minesLeft --;
                         // If all the mines are flagged, exit
                         if(actualMinesLeft == 0)
+                            JOptionPane.showMessageDialog(null,
+                                    "You WIN! \n It took you " +
+                                            MineSweapPart.STARTTIME.until(LocalTime.now(),MINUTES) +
+                                            " minutes.");
                             System.exit(0);
                     }
                     setTitle("MineSweap " +
@@ -121,6 +128,9 @@ public class MineSweapPart extends JFrame
 // if the MyJButton that was just exposed is a mine
             if ( sGrid[jb.row][jb.col] == 9 )
             {
+                JOptionPane.showMessageDialog(null,
+                        "Sorry, you lost! \n You found " +
+                                (MineSweapPart.MINES - MineSweapPart.actualMinesLeft) + " mines!");
                 System.exit(0);
                 // Exit, the cell you exposed was a mine
             }
