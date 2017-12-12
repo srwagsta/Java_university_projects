@@ -45,7 +45,7 @@ public class GUI extends JFrame
     {
         try{
             int value = Integer.parseInt(myText.getText());
-            // Quick edge case to make sure value was positive
+            // Quick edge case to make sure value was positive between (0-200]
             if(value <= 0 || value > 200){ throw new NumberFormatException(); }
             if( value < 36 ){
                 myLabel.setText("\"The duty of youth is to challenge corruption.\" " +
