@@ -36,6 +36,7 @@ public class MineSweapPart extends JFrame
         this.setMines();
         this.setVisible(true);
     }
+
     public void createContents()
     {
         for (int br = 0; br < ROWS; ++br)
@@ -53,6 +54,8 @@ public class MineSweapPart extends JFrame
             }
         }
     }
+
+
     // nested private class
     private class MyListener implements ActionListener
     {
@@ -75,8 +78,10 @@ public class MineSweapPart extends JFrame
 // if the MyJbutton that the mouse action occurred in is a mine
                     if ( sGrid[jb.row][jb.col] == 9 )
                     {
-// what else do you need to adjust?
-// could the game be over?
+                        MineSweapPart.actualMinesLeft -- ;
+                        MineSweapPart.minesLeft --;
+                        if(actualMinesLeft == 0)
+                            System.exit(0);
                     }
                     setTitle("MineSweap " +
                             MineSweapPart.minesLeft + " Mines left");
@@ -122,35 +127,60 @@ public class MineSweapPart extends JFrame
             if ( sGrid[jb.row][jb.col] == 0 )
             {
                // exposeCell((MyJButton)(jb.getParent().getComponentAt(jb.row+1,jb.col)));
-
+                //exposeCell((MyJButton)jb.findComponentAt(jb.row+1,jb.col));
 // lots of work here - must expose all MyJButtons in its perimeter
 // and so on
 // and so on
 // .
 // .
 // .
+                return;
             }
         }
     }
     // nested private class
-    public static void main(String[] args)
-    {
-        new MineSweapPart();
-    }
+
     //************************************************************************************************
 // place MINES number of mines in sGrid and adjust all of the "mines in perimeter" values
     private void setMines()
     {
         for(int i=0; i<MINES; i++) {
-            // Check that this cell has not already been set
-            int randRow = ThreadLocalRandom.current().nextInt(ROWS, COLS + 1);
-            int randCol = ThreadLocalRandom.current().nextInt(ROWS, COLS + 1);
-            if(!(sGrid[randRow][randCol] == 1)){
-                sGrid[randRow][randCol] = 1;
+            int randRow = ThreadLocalRandom.current().nextInt(0, ROWS);
+            int randCol = ThreadLocalRandom.current().nextInt(0, COLS );
+            if(!(sGrid[randRow][randCol] == 9)){ // Check that this cell is not a mine
+                sGrid[randRow][randCol] = 9;
+                // Check the row above the mine
+                if(randRow + 1 < sGrid.length){
+                    if(sGrid[randRow+1][randCol] != 9){
+                        sGrid[randRow+1][randCol]++;
+                    }
+                    if(randCol + 1 < sGrid[randRow+1].length && sGrid[randRow+1][randCol+1] != 9 ){
+                        sGrid[randRow+1][randCol+1]++;
+                    }
+                    if(randCol- 1 >= 0 && sGrid[randRow+1][randCol-1] != 9){
+                        sGrid[randRow+1][randCol-1]++;
+                    }
+                }
+
+                if(randRow - 1 >= 0 ){
+                    if(sGrid[randRow-1][randCol] != 9){
+                        sGrid[randRow-1][randCol]++;
+                    }
+                    if(randCol + 1 < sGrid[randRow-1].length && sGrid[randRow-1][randCol+1] != 9){
+                        sGrid[randRow-1][randCol+1]++;
+                    }
+                    if(randCol- 1 >= 0 && sGrid[randRow-1][randCol-1] != 9){
+                        sGrid[randRow-1][randCol-1]++;
+                    }
+                }
+                if(randCol + 1 < sGrid[randRow].length && sGrid[randRow][randCol+1] != 9){ sGrid[randRow][randCol+1]++; }
+                if(randCol- 1 >= 0 && sGrid[randRow][randCol-1] != 9 ){ sGrid[randRow][randCol-1]++; }
             } else{ i--; }
         }
-// your code here ...
+
+
     }
+
     private String getStateStr(int row, int col)
     {
 // no mines in this MyJbutton’s perimeter
@@ -162,5 +192,10 @@ public class MineSweapPart extends JFrame
 // this MyJButton in a mine
         else
             return MineSweapPart.MINE;
+    }
+
+    public static void main(String[] args)
+    {
+        new MineSweapPart();
     }
 }

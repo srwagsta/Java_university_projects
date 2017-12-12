@@ -60,7 +60,7 @@ public class GUI extends JFrame
                         "-Muhammad Ali");
             }
 
-        }catch(Exception e){
+        }catch(NumberFormatException e){
             myLabel.setText("Invalid entry, I need a positive integer value." +
                     "\nBetween 0 and 200");
         }
