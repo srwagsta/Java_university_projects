@@ -91,7 +91,7 @@ public class MineSweapPart extends JFrame
                                     "You WIN! \n It took you " +
                                             MineSweapPart.STARTTIME.until(LocalTime.now(),MINUTES) +
                                             " minutes.");
-                            System.exit(0);
+                            running = false;
                     }
                     setTitle("MineSweap " +
                             MineSweapPart.minesLeft + " Mines left");
@@ -131,20 +131,34 @@ public class MineSweapPart extends JFrame
                 JOptionPane.showMessageDialog(null,
                         "Sorry, you lost! \n You found " +
                                 (MineSweapPart.MINES - MineSweapPart.actualMinesLeft) + " mines!");
-                System.exit(0);
+                running = false;
                 // Exit, the cell you exposed was a mine
             }
 // if the MyJButton that was just exposed has no mines in its perimeter
             if ( sGrid[jb.row][jb.col] == 0 )
             {
-               // exposeCell((MyJButton)(jb.getParent().getComponentAt(jb.row+1,jb.col)));
-                //exposeCell((MyJButton)jb.findComponentAt(jb.row+1,jb.col));
-// lots of work here - must expose all MyJButtons in its perimeter
-// and so on
-// and so on
-                return;
-            }
-        }
+                // Need nested for loop to go through the entire array to look at your piremeter
+                for(int x = -1; x<2; x++){
+                    for(int y = -1; y<2; y++){
+                        // Check that x && y are not == 0
+                        // if the for loops point to an inbound point
+                        if((x != 0 && y != 0) &&
+                                (jb.row+x >= 0) && (jb.row+x < MineSweapPart.ROWS) &&
+                                (jb.col+y >= 0) && (jb.col+y < MineSweapPart.COLS)){
+
+                            int index = ((jb.row+x)*MineSweapPart.ROWS) + (jb.col+y);
+                            MyJButton newButton = (MyJButton)(jb.getParent().getComponent(index));
+                            // if the new button is not flagged and not exposed
+                            if (!newButton.getText().equals(MineSweapPart.FLAGGED)&&
+                                    !newButton.getBackground().equals(expColor)){
+                                exposeCell(newButton);
+                            } //
+
+                        } // Close if
+                    } } // Close for loops
+
+            } // close if
+        } // close expose cell function
     }
     // nested private class
 
@@ -204,6 +218,25 @@ public class MineSweapPart extends JFrame
 
     public static void main(String[] args)
     {
+
+        try {
+            // Set System L&F
+            UIManager.setLookAndFeel(
+                    UIManager.getSystemLookAndFeelClassName());
+        }
+        catch (UnsupportedLookAndFeelException e) {
+            // handle exception
+        }
+        catch (ClassNotFoundException e) {
+            // handle exception
+        }
+        catch (InstantiationException e) {
+            // handle exception
+        }
+        catch (IllegalAccessException e) {
+            // handle exception
+        }
+        
         new MineSweapPart();
     }
 }
