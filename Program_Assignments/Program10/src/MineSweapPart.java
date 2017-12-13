@@ -142,7 +142,7 @@ public class MineSweapPart extends JFrame
                     for(int y = -1; y<2; y++){
                         // Check that x && y are not == 0
                         // if the for loops point to an inbound point
-                        if((x != 0 && y != 0) &&
+                        if(!(x == 0 && y == 0) &&
                                 (jb.row+x >= 0) && (jb.row+x < MineSweapPart.ROWS) &&
                                 (jb.col+y >= 0) && (jb.col+y < MineSweapPart.COLS)){
 
@@ -152,7 +152,7 @@ public class MineSweapPart extends JFrame
                             if (!newButton.getText().equals(MineSweapPart.FLAGGED)&&
                                     !newButton.getBackground().equals(expColor)){
                                 exposeCell(newButton);
-                            } //
+                            } 
 
                         } // Close if
                     } } // Close for loops
@@ -236,7 +236,7 @@ public class MineSweapPart extends JFrame
         catch (IllegalAccessException e) {
             // handle exception
         }
-        
+
         new MineSweapPart();
     }
 }
